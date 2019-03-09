@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         loadDbProduct();
 
 
-        productListViewAdapter = new ProductListViewAdapter(listProduct);
-        listViewProduct = findViewById(R.id.listproduct);
+        productListViewAdapter  = new ProductListViewAdapter(listProduct);
+        listViewProduct         = findViewById(R.id.listproduct);
         listViewProduct.setAdapter(productListViewAdapter);
 
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Lắng nghe bắt sự kiện một phần tử danh sách được chọn
+        //Lắng nghe bắt sự kiện một phần tử danh sách được chọn, mở Activity để soạn thảo phần tử
         listViewProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -139,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         Cursor cursor = db.rawQuery("SELECT id, name, price from product", null);
 
-
         //Đến dòng đầu của tập dữ liệu
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -164,40 +163,7 @@ public class MainActivity extends AppCompatActivity {
         return tableExist;
     }
 
-    public void initDb() {
-        SQLiteDatabase db = openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
 
-//        db.execSQL("DROP TABLE product");
-
-
-        if (!(isTableExist(db, "product"))) {
-            Log.i(DB_TAG, "Create product table");
-
-            String queryCreateTable = "CREATE TABLE product ( " +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "name VARCHAR (255) NOT NULL, " +
-                    "price DECIMAL DEFAULT (0)" +
-                    ")";
-
-            db.execSQL(queryCreateTable);
-
-            //Chèn một số dữ liệu mặc định
-//            String insertProduct = "INSERT INTO product (name, price ) VALUES (?,?);";
-//
-//            db.execSQL(insertProduct, new String[] {"Iphone 6", "500"});
-//            db.execSQL(insertProduct, new String[] {"Iphone 7", "700"});
-//            db.execSQL(insertProduct, new String[] {"Sony Abc", "800"});
-//            db.execSQL(insertProduct, new String[] {"Samsung XYZ", "900"});
-//            db.execSQL(insertProduct, new String[] {"SP 5", "500"});
-//            db.execSQL(insertProduct, new String[] {"SP 6", "700"});
-//            db.execSQL(insertProduct, new String[] {"SP 7", "800"});
-//            db.execSQL(insertProduct, new String[] {"SP 8", "900"});
-
-        }
-
-        db.close();
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
