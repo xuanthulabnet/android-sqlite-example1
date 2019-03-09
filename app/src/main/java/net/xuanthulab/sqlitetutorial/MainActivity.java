@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> listProduct;
     ProductListViewAdapter productListViewAdapter;
     ListView listViewProduct;
-    String DB_TAG = "DBEXAMPLE";
+    String DB_TAG = "SQLITE_TUTORIAL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
